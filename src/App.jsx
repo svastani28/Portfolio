@@ -1,226 +1,403 @@
-const projects = [
+import { useEffect, useState } from 'react'
+import './index.css'
+
+const navLinks = [
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Leadership', href: '#leadership' },
+  { label: 'Contact', href: '#contact' },
+]
+
+const highlightCards = [
+  { value: 'Software + Strategy', label: 'Built for technical and business audiences' },
+  { value: '3 Internships', label: 'Fintech, aerospace, and real estate exposure' },
+  { value: '20+ Person Team', label: 'Current HackNC co-leadership scope' },
+]
+
+const experienceItems = [
+  {
+    period: 'May 2025 – August 2025',
+    company: 'GreenSky',
+    role: 'Capital Markets Intern',
+    description:
+      'Built predictive models and tools for identifying loan pools that met rating-agency criteria, prepared data tapes and stratifications, and supported investor and bank reporting across structured finance workflows.',
+    tags: ['Capital markets', 'Analytics', 'Excel', 'Structured finance'],
+  },
+  {
+    period: 'January 2024 – May 2024',
+    company: 'bSide Partners',
+    role: 'Intern',
+    description:
+      'Supported business development and investment evaluation with data analysis and Excel macro work for commercial real estate acquisition targets.',
+    tags: ['Excel macros', 'Data analysis', 'Commercial real estate'],
+  },
+  {
+    period: 'July 2023',
+    company: 'Hermeus',
+    role: 'Software Engineering Intern',
+    description:
+      'Helped build a Java-based interface for maneuvering a commercial hypersonic aircraft and collaborated on backend features spanning database management, API work, and software development.',
+    tags: ['Java', 'API design', 'Backend', 'UI'],
+  },
+]
+
+const projectCards = [
   {
     title: 'CollegeConnect',
-    type: 'React Web Platform',
-    description:
-      'A web platform supporting high-school students, especially first-generation and under-resourced students, through the college application process with guidance, resources, mentorship, and college search tools.',
-    tech: ['React', 'Vite', 'React Router', 'CSS'],
-    link: 'https://github.com/svastani28/cssg-CollegeConnect',
+    eyebrow: 'Featured project',
+    summary:
+      'A React platform designed to help high-school students, especially first-generation and under-resourced students, navigate the college application process through guidance, resources, and mentorship.',
+    impact: 'Mission-driven product design for education access',
+    tech: ['React', 'Vite', 'React Router', 'Responsive CSS'],
+    primaryLink: 'https://github.com/svastani28/cssg-CollegeConnect',
+    secondaryLink: '#contact',
+    secondaryLabel: 'Ask about this project',
   },
   {
     title: 'Pauli Murray Interactive Tour',
-    type: 'Digital Education Project',
-    description:
-      'An interactive digital experience designed to educate visitors about the life and legacy of Pauli Murray through accessible storytelling and thoughtful web design.',
+    eyebrow: 'Client-facing work',
+    summary:
+      'An interactive digital experience built to educate visitors on the life and legacy of Pauli Murray through accessible storytelling, guided exploration, and modern web design.',
+    impact: 'Public-facing educational experience',
     tech: ['React', 'TypeScript', 'Firebase', 'Node.js'],
-    link: '#',
+    primaryLink: '#contact',
+    secondaryLink: '#projects',
+    secondaryLabel: 'More details soon',
   },
   {
-    title: 'Parr Center Interactive Learning System',
-    type: 'Client Project',
-    description:
-      'An educational platform built for a UNC department to create a more engaging and interactive learning experience for users.',
+    title: 'Parr Center Learning Platform',
+    eyebrow: 'Client-facing work',
+    summary:
+      'An interactive educational platform for a UNC partner focused on improving engagement, structuring information clearly, and making learning experiences more approachable.',
+    impact: 'Interactive learning system for real users',
     tech: ['React', 'Firestore', 'Storage', 'Node.js'],
-    link: '#',
+    primaryLink: '#contact',
+    secondaryLink: '#projects',
+    secondaryLabel: 'More details soon',
   },
-];
+]
 
-const strengths = [
-  'Leadership grounded in trust, communication, and service',
-  'Technical experience across web development, product thinking, and data-driven problem solving',
-  'Strong interest in using technology to expand access and create social impact',
-  'Experience managing teams, outreach, and operations across student organizations and projects',
-];
-
-const experiences = [
+const leadershipItems = [
   {
-    role: 'Co-Lead, HackNC',
-    details:
-      'Lead planning and execution for UNC’s flagship hackathon while coordinating logistics, sponsorship, outreach, and team operations.',
+    title: 'HackNC',
+    role: 'Co-Lead(President)',
+    copy:
+      'Leading a 20+ member organizing team across logistics, marketing, sponsorship, and execution for UNC’s flagship 500+ participant hackathon.',
   },
   {
-    role: 'VP of Outreach & Events, CS + Social Good',
-    details:
-      'Support club growth, partnerships, and events while helping connect technical projects to meaningful community impact.',
+    title: 'CS + Social Good',
+    role: 'VP of Outreach/Events and Project Team',
+    copy:
+      'Running outreach, external relations, events, and project collaboration while also building interactive platforms web for UNC departments and nonprofit organizations.',
   },
   {
-    role: 'Student, UNC Chapel Hill',
-    details:
-      'Computer Science and Business student with a minor in Public Policy, focused on technology, leadership, and social impact.',
+    title: 'Aga Khan Development Network (AKDN)',
+    role: 'Mentor',
+    copy:
+      'Coaching low-income students with college application processes, including essay editing, financial aid guidance, and application submission',
   },
-];
+  {
+    title: 'Coded for Africa',
+    role: 'Founder',
+    copy:
+      'Program to help 200+ students develop their interest in technology to improve their future quality of life through workshops, mentorship, and project-based learning.',
+  },
+]
 
-const galleryItems = [
-  'Hackathon leadership and event operations',
-  'Client-facing project work with UNC organizations',
-  'Technical builds focused on education and accessibility',
-  'Mentorship, outreach, and public speaking experiences',
-];
+const skills = [
+  'React',
+  'TypeScript',
+  'Java',
+  'Python',
+  'C',
+  'SQL',
+  'Firebase',
+  'Git',
+  'Excel',
+  'Tableau',
+  'Snowflake',
+  'Linux',
+]
 
-function SectionTitle({ eyebrow, title, text }) {
+function SectionIntro({ eyebrow, title, copy }) {
   return (
-    <div className="section-header">
-      <p className="eyebrow">{eyebrow}</p>
+    <div className="section-intro">
+      <span className="eyebrow">{eyebrow}</span>
       <h2>{title}</h2>
-      {text && <p className="section-text">{text}</p>}
+      {copy ? <p>{copy}</p> : null}
     </div>
-  );
+  )
 }
 
 function App() {
+  const [activeSection, setActiveSection] = useState('about')
+
+  useEffect(() => {
+    const sectionIds = navLinks.map((item) => item.href.replace('#', ''))
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean)
+
+    const updateActiveSection = () => {
+      const navHeight = window.innerWidth > 720 ? 88 : 76
+      const triggerLine = navHeight + 140
+
+      let currentSection = sectionIds[0]
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect()
+
+        if (rect.top <= triggerLine && rect.bottom > triggerLine) {
+          currentSection = section.id
+        }
+      })
+
+      setActiveSection(currentSection)
+    }
+
+    updateActiveSection()
+    window.addEventListener('scroll', updateActiveSection)
+    window.addEventListener('resize', updateActiveSection)
+
+    return () => {
+      window.removeEventListener('scroll', updateActiveSection)
+      window.removeEventListener('resize', updateActiveSection)
+    }
+  }, [])
+
   return (
     <div className="site-shell">
-      <header className="hero" id="top">
-        <nav className="nav">
-          <a href="#top" className="brand">Sanay Vastani</a>
-          <div className="nav-links">
-            <a href="#about">About</a>
-            <a href="#strengths">Strengths</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#contact">Contact</a>
+      <div className="glow glow-left" />
+      <div className="glow glow-right" />
+      <div className="grid-overlay" />
+
+      <header className="hero-wrap" id="top">
+        <nav className="site-nav">
+          <a href="#top" className="brand-mark">SV</a>
+          <div className="nav-group">
+            {navLinks.map((item) => {
+              const isActive = activeSection === item.href.replace('#', '')
+
+              return (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className={isActive ? 'active' : ''}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              )
+            })}
           </div>
+          <a href="/resume.pdf" className="resume-link" target="_blank" rel="noreferrer">
+            Resume
+          </a>
         </nav>
 
-        <div className="hero-content">
-          <div>
-            <p className="eyebrow">Student • Builder • Mentor</p>
-            <h1>Creating thoughtful technology, strong teams, and impact-driven projects.</h1>
-            <p className="hero-copy">
-              I’m Sanay Vastani, a UNC Chapel Hill student studying Computer Science and Business with a minor in Public Policy. I’m interested in building tools that expand access, strengthen communities, and solve real problems.
+        <section className="hero-grid">
+          <div className="hero-copy">
+            <span className="eyebrow">UNC Chapel Hill • Computer Science • Economics • Public Policy</span>
+            <h1>
+              Building products, teams, and ideas that feel <span>clear</span>, <span>useful</span>, and credible.
+            </h1>
+            <p className="hero-text">
+              I’m Sanay Vastani, a student builder with experience across software engineering,
+              capital markets, student leadership, and community-centered product work. I’m
+              especially interested in roles where technical execution, business thinking, and
+              strong communication all matter.
             </p>
             <div className="hero-actions">
-              <a className="primary-btn" href="#projects">View Projects</a>
-              <a className="secondary-btn" href="#contact">Contact Me</a>
+              <a href="#projects" className="btn btn-primary">View projects</a>
+              <a href="https://www.linkedin.com/in/sanayvastani" className="btn btn-secondary" target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
+              <a href="https://github.com/svastani28" className="btn btn-secondary" target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+            </div>
+            <div className="stat-row">
+              {highlightCards.map((item) => (
+                <article key={item.label} className="stat-panel reveal-card">
+                  <strong>{item.value}</strong>
+                  <span>{item.label}</span>
+                </article>
+              ))}
             </div>
           </div>
 
-          <div className="hero-card">
-            <p className="hero-card-label">Currently focused on</p>
+          <aside className="hero-side reveal-card">
+            <div className="side-label">Now</div>
+            <h3>What this site is designed to show</h3>
             <ul>
-              <li>Web development for social impact</li>
-              <li>Student leadership and event operations</li>
-              <li>Mentorship and access in education</li>
+              <li>Technical projects with real user and stakeholder context</li>
+              <li>Leadership experience that goes beyond just club membership</li>
+              <li>A profile that feels strong to both engineers and business recruiters</li>
             </ul>
-          </div>
-        </div>
+            <div className="hero-side-divider" />
+            <p>
+              This version uses a darker visual system, clearer hierarchy, and more polished
+              project framing so it feels closer to an internship candidate site than a class portfolio.
+            </p>
+          </aside>
+        </section>
       </header>
 
-      <main>
-        <section id="about" className="section">
-          <SectionTitle
-            eyebrow="About Me"
-            title="Here’s who I am and what I do"
-            text="My work sits at the intersection of technology, leadership, and service. I care deeply about creating inclusive spaces where people feel supported, heard, and empowered to succeed."
+      <main className="main-content">
+        <section className="content-section" id="about">
+          <SectionIntro
+            eyebrow="About"
+            title="A profile built around execution, communication, and range."
+            copy="I like work that sits at the intersection of product thinking, technical problem-solving, and real-world usefulness. The through-line across my projects is simple: I want the end result to make sense to the people using it."
           />
+
           <div className="about-grid">
-            <div className="about-card">
-              <h3>Mission</h3>
+            <article className="info-card reveal-card">
+              <h3>How I’m positioned</h3>
               <p>
-                I believe trust and communication are the foundation of meaningful leadership. Whether I’m building a product, leading a team, or mentoring students, I try to create environments where people can collaborate openly and grow confidently.
+                My experience spans software, finance, outreach, and operations, which lets me work comfortably with both technical teams and non-technical stakeholders. That mix shows up in the way I build interfaces, explain ideas, and organize projects.
               </p>
-            </div>
-            <div className="about-card">
-              <h3>Interests</h3>
-              <p>
-                I’m especially interested in education access, product development, technical leadership, and using software to solve practical community-centered problems.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section id="strengths" className="section alt-section">
-          <SectionTitle
-            eyebrow="Personal Strengths"
-            title="What I bring to teams and projects"
-          />
-          <div className="strengths-grid">
-            {strengths.map((strength) => (
-              <article className="strength-card" key={strength}>
-                <p>{strength}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="experience" className="section">
-          <SectionTitle
-            eyebrow="Experience"
-            title="Leadership, outreach, and technical work"
-          />
-          <div className="timeline">
-            {experiences.map((item) => (
-              <article className="timeline-item" key={item.role}>
-                <h3>{item.role}</h3>
-                <p>{item.details}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="projects" className="section alt-section">
-          <SectionTitle
-            eyebrow="Projects"
-            title="A few things I’ve built"
-            text="This section is modeled after the project-focused feel of your current site, but organized into cleaner portfolio cards that are easier to update over time."
-          />
-          <div className="projects-grid">
-            {projects.map((project) => (
-              <article className="project-card" key={project.title}>
-                <p className="project-type">{project.type}</p>
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <div className="tag-row">
-                  {project.tech.map((tag) => (
-                    <span className="tag" key={tag}>{tag}</span>
-                  ))}
-                </div>
-                <a href={project.link} target="_blank" rel="noreferrer">
-                  View Project
-                </a>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="gallery" className="section">
-          <SectionTitle
-            eyebrow="Gallery of Accomplishments"
-            title="Highlights you can expand later"
-            text="For now, this section uses placeholders so you can quickly swap in real photos, screenshots, awards, or event images from your current portfolio."
-          />
-          <div className="gallery-grid">
-            {galleryItems.map((item) => (
-              <div className="gallery-card" key={item}>
-                <div className="gallery-placeholder">Add image</div>
-                <p>{item}</p>
+            </article>
+            <article className="info-card reveal-card emphasis-card">
+              <h3>What I bring</h3>
+              <div className="bullet-stack">
+                <div><span className="dot" />Strong presentation and stakeholder communication</div>
+                <div><span className="dot" />Comfort with both code and execution details</div>
+                <div><span className="dot" />Leadership experience with visible ownership</div>
+                <div><span className="dot" />A practical, polished style of shipping work</div>
               </div>
+            </article>
+          </div>
+        </section>
+
+        <section className="content-section" id="experience">
+          <SectionIntro
+            eyebrow="Experience"
+            title="Internships that show both technical depth and business fluency."
+            copy="The strongest signal here is range: engineering, analytics, capital markets, and operational work across very different environments."
+          />
+
+          <div className="timeline-list">
+            {experienceItems.map((item) => (
+              <article key={item.company + item.role} className="timeline-item reveal-card">
+                <div className="timeline-marker" />
+                <div className="timeline-meta">
+                  <span>{item.period}</span>
+                  <h3>{item.role}</h3>
+                  <h4>{item.company}</h4>
+                </div>
+                <div className="timeline-copy">
+                  <p>{item.description}</p>
+                  <div className="tag-row">
+                    {item.tags.map((tag) => (
+                      <span key={tag} className="tag">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
         </section>
 
-        <section id="contact" className="section alt-section">
-          <SectionTitle
-            eyebrow="Contact"
-            title="Let’s connect"
-            text="You can use these buttons for your live links once you update them with your own information."
+        <section className="content-section" id="projects">
+          <SectionIntro
+            eyebrow="Projects"
+            title="Selected work with a cleaner, more product-focused presentation."
+            copy="These cards are written to scan well for recruiters while still giving enough context for someone technical to understand the stack and intent."
           />
-          <div className="contact-card">
+
+          <div className="project-showcase">
+            {projectCards.map((project, index) => (
+              <article key={project.title} className={`project-card reveal-card ${index === 0 ? 'project-featured' : ''}`}>
+                <div className="project-visual">
+                  <div className="window-bar">
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                  <div className="mockup-body">
+                    <div className="mockup-line short" />
+                    <div className="mockup-line medium" />
+                    <div className="mockup-grid">
+                      <div />
+                      <div />
+                      <div />
+                    </div>
+                  </div>
+                </div>
+                <div className="project-content">
+                  <span className="eyebrow">{project.eyebrow}</span>
+                  <h3>{project.title}</h3>
+                  <p>{project.summary}</p>
+                  <strong className="impact-line">{project.impact}</strong>
+                  <div className="tag-row">
+                    {project.tech.map((tech) => (
+                      <span key={tech} className="tag">{tech}</span>
+                    ))}
+                  </div>
+                  <div className="project-actions">
+                    <a href={project.primaryLink} className="btn btn-primary" target={project.primaryLink.startsWith('http') ? '_blank' : undefined} rel={project.primaryLink.startsWith('http') ? 'noreferrer' : undefined}>
+                      {project.primaryLink.startsWith('http') ? 'View project' : 'Contact me'}
+                    </a>
+                    <a href={project.secondaryLink} className="btn btn-secondary">
+                      {project.secondaryLabel}
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="content-section" id="leadership">
+          <SectionIntro
+            eyebrow="Leadership"
+            title="The part that makes the profile more memorable."
+            copy="For internship recruiting, this section helps show that I can do more than contribute individually. I can also coordinate, represent, and lead."
+          />
+
+          <div className="leadership-grid">
+            {leadershipItems.map((item) => (
+              <article key={item.title} className="leader-card reveal-card">
+                <span className="eyebrow">{item.role}</span>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="content-section" id="skills">
+          <SectionIntro
+            eyebrow="Skills"
+            title="Tools I’ve used across coursework, internships, and student projects."
+          />
+          <div className="skills-cloud reveal-card">
+            {skills.map((skill) => (
+              <span key={skill} className="skill-pill">{skill}</span>
+            ))}
+          </div>
+        </section>
+
+        <section className="content-section contact-section" id="contact">
+          <article className="contact-card reveal-card">
+            <span className="eyebrow">Contact</span>
+            <h2>Let’s connect.</h2>
             <p>
-              I’m always open to connecting about projects, internships, student leadership, and opportunities to build technology that makes a difference.
+              I’m especially interested in internship opportunities where product sense,
+              technical ability, and communication all matter.
             </p>
             <div className="contact-links">
-              <a className="primary-btn" href="mailto:your-email@unc.edu">Email Me</a>
-              <a className="secondary-btn" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
-              <a className="secondary-btn" href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
-              <a className="secondary-btn" href="/resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+              <a href="mailto:svastani@unc.edu">svastani@unc.edu</a>
+              <a href="https://www.linkedin.com/in/sanayvastani" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href="https://github.com/svastani28" target="_blank" rel="noreferrer">GitHub</a>
             </div>
-          </div>
+          </article>
         </section>
       </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
