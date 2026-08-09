@@ -156,6 +156,52 @@ a {
 .resume-link {
   color: #d9e7f7;
   font-weight: 700;
+  background: none;
+  border: none;
+  font-size: 0.96rem;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0.62rem 0.9rem;
+  border-radius: 999px;
+}
+
+.resume-dropdown {
+  position: relative;
+}
+
+.resume-dropdown:focus-visible,
+.resume-dropdown:focus {
+  outline: none;
+}
+
+.resume-menu {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  display: grid;
+  gap: 0.3rem;
+  min-width: 230px;
+  padding: 0.55rem;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 16px;
+  background: rgba(9, 13, 22, 0.96);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  z-index: 10000;
+}
+
+.resume-menu a {
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #dbe8f7;
+}
+
+.resume-menu a:hover {
+  background: rgba(37, 99, 235, 0.22);
+  color: #9bdcff;
 }
 
 .hero-grid {
@@ -546,12 +592,32 @@ a {
   padding-top: 1rem;
 }
 
+.skills-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
 .skills-cloud {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.8rem;
   padding: 1.2rem;
-  border-radius: 28px;
+  border-radius: 24px;
+}
+
+.skills-group-label {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #7dd3fc;
+}
+
+.skill-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
 }
 
 .contact-section {
@@ -560,6 +626,10 @@ a {
 
 .contact-card {
   max-width: 760px;
+}
+
+.contact-resumes {
+  margin-top: 0.85rem;
 }
 
 .contact-links a {
@@ -591,7 +661,8 @@ a {
   .project-card,
   .timeline-item,
   .about-grid,
-  .leadership-grid {
+  .leadership-grid,
+  .skills-groups {
     grid-template-columns: 1fr;
   }
 
