@@ -282,21 +282,6 @@ function App() {
               ))}
             </div>
           </div>
-
-          <aside className="hero-side reveal-card">
-            <div className="side-label">Now</div>
-            <h3>What this site is designed to show</h3>
-            <ul>
-              <li>Technical projects with real user and stakeholder context</li>
-              <li>Leadership experience that goes beyond just club membership</li>
-              <li>A profile that feels strong to both engineers and business recruiters</li>
-            </ul>
-            <div className="hero-side-divider" />
-            <p>
-              This version uses a darker visual system, clearer hierarchy, and more polished
-              project framing so it feels closer to an internship candidate site than a class portfolio.
-            </p>
-          </aside>
         </section>
       </header>
 
