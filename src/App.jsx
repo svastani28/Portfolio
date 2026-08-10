@@ -9,8 +9,8 @@ const navLinks = [
 ]
 
 const resumeLinks = [
-  { label: 'Product Management Resume', href: '/Sanay_Vastani_PM_Resume.pdf' },
-  { label: 'Data Analytics Resume', href: '/Sanay_Vastani_DataAnalytics_Resume.pdf' },
+  { label: 'Product Management Resume', href: `${import.meta.env.BASE_URL}Sanay_Vastani_PM_Resume.pdf` },
+  { label: 'Data Analytics Resume', href: `${import.meta.env.BASE_URL}Sanay_Vastani_DataAnalytics_Resume.pdf` },
 ]
 
 const highlightCards = [
