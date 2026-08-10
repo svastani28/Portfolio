@@ -79,10 +79,10 @@ const projectCards = [
     gallery: [],
   },
   {
-    title: 'Parr Center Learning Platform',
-    eyebrow: 'Client-facing work',
+    title: 'Parr Center Ethics Bowl',
+    eyebrow: 'Learning platform',
     summary:
-      'An interactive educational platform for a UNC partner focused on improving engagement, structuring information clearly, and making learning experiences more approachable.',
+      'An interactive educational platform for a UNC department focused on improving engagement, structuring information clearly, and making learning experiences more approachable.',
     impact: 'Interactive learning system for real users',
     tech: ['React', 'Firestore', 'Storage', 'Node.js'],
     link: null,
