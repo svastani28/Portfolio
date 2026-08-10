@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import './index.css'
 
 const navLinks = [
-  { label: 'About', href: '#about' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
   { label: 'Leadership', href: '#leadership' },
@@ -17,7 +16,6 @@ const resumeLinks = [
 const highlightCards = [
   { value: 'Product + Data + Code', label: 'Built for technical, analytical, and business audiences' },
   { value: '4 Internships', label: 'FinTech, aerospace, and real estate exposure' },
-  { value: '20+ Person Team', label: 'Current HackNC co-leadership scope' },
 ]
 
 const experienceItems = [
@@ -55,6 +53,8 @@ const experienceItems = [
   },
 ]
 
+// Add more entries here any time — the grid and "View all projects" toggle scale automatically.
+// `gallery` accepts image paths (e.g. from /public/gallery/...) and renders inside the project modal once populated.
 const projectCards = [
   {
     title: 'CollegeConnect',
@@ -63,9 +63,9 @@ const projectCards = [
       'A React platform designed to help high-school students, especially first-generation and under-resourced students, navigate the college application process through guidance, resources, and mentorship.',
     impact: 'Mission-driven product design for education access',
     tech: ['React', 'Vite', 'React Router', 'Responsive CSS'],
-    primaryLink: 'https://github.com/svastani28/cssg-CollegeConnect',
-    secondaryLink: '#contact',
-    secondaryLabel: 'Ask about this project',
+    link: 'https://github.com/svastani28/cssg-CollegeConnect',
+    linkLabel: 'View repo',
+    gallery: [],
   },
   {
     title: 'Pauli Murray Interactive Tour',
@@ -74,9 +74,9 @@ const projectCards = [
       'An interactive digital experience built to educate visitors on the life and legacy of Pauli Murray through accessible storytelling, guided exploration, and modern web design.',
     impact: 'Public-facing educational experience',
     tech: ['React', 'TypeScript', 'Firebase', 'Node.js'],
-    primaryLink: '#contact',
-    secondaryLink: '#projects',
-    secondaryLabel: 'More details soon',
+    link: null,
+    linkLabel: null,
+    gallery: [],
   },
   {
     title: 'Parr Center Learning Platform',
@@ -85,42 +85,50 @@ const projectCards = [
       'An interactive educational platform for a UNC partner focused on improving engagement, structuring information clearly, and making learning experiences more approachable.',
     impact: 'Interactive learning system for real users',
     tech: ['React', 'Firestore', 'Storage', 'Node.js'],
-    primaryLink: '#contact',
-    secondaryLink: '#projects',
-    secondaryLabel: 'More details soon',
+    link: null,
+    linkLabel: null,
+    gallery: [],
   },
 ]
 
+const PROJECTS_PREVIEW_COUNT = 3
+
+// `gallery` accepts image paths for each role — populate to surface a "View photos" button and modal automatically.
 const leadershipItems = [
   {
     title: 'HackNC',
     role: 'Co-Lead (President) | March 2025 – Present',
     copy:
       'Leading a 20+ member organizing team across logistics, marketing, sponsorship, and execution for UNC’s flagship 500+ participant hackathon, driving sponsor outreach that secured over $30k in corporate and university funding.',
+    gallery: [],
   },
   {
     title: 'UNC CS + Social Good',
     role: 'VP of Outreach and Project Team | September 2025 – Present',
     copy:
       'Leading outreach, external relations, social media, and budget planning for 100+ members, and building interactive educational platforms for UNC departments — including the Parr Center and Pauli Murray Center — using Claude Code, React, TypeScript, Firebase, and Node.js.',
+    gallery: [],
   },
   {
     title: 'Apollo Aspire',
     role: 'Mentor | December 2024 – Present',
     copy:
       'Coaching low-income students through the college application process, including essay editing, financial aid guidance, and application submission.',
+    gallery: [],
   },
   {
     title: 'Aga Khan Development Network (AKDN)',
     role: 'Youth Team Leader | August 2020 – 2024',
     copy:
       'Led 100+ volunteers ages 8–18 to organize youth activities and manage events serving 5,000 people every weekend.',
+    gallery: [],
   },
   {
     title: 'Coded for Africa',
     role: 'Founder | August 2020 – Present',
     copy:
       'Built a program to help 200+ students in Nairobi develop their interest in technology, and partnered with IBM to bring Cloud Certification programs to Jaffery Academy and Aga Khan Education Services of Kenya.',
+    gallery: [],
   },
 ]
 
@@ -153,9 +161,46 @@ function SectionIntro({ eyebrow, title, copy }) {
   )
 }
 
+function Modal({ onClose, children, labelledBy }) {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') onClose()
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = previousOverflow
+    }
+  }, [onClose])
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div
+        className="modal-panel reveal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={labelledBy}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button type="button" className="modal-close" onClick={onClose} aria-label="Close">
+          ✕
+        </button>
+        {children}
+      </div>
+    </div>
+  )
+}
+
 function App() {
-  const [activeSection, setActiveSection] = useState('about')
+  const [activeSection, setActiveSection] = useState(navLinks[0].href.replace('#', ''))
   const [resumeMenuOpen, setResumeMenuOpen] = useState(false)
+  const [activeProject, setActiveProject] = useState(null)
+  const [activeLeader, setActiveLeader] = useState(null)
+  const [showAllProjects, setShowAllProjects] = useState(false)
 
   useEffect(() => {
     const sectionIds = navLinks.map((item) => item.href.replace('#', ''))
@@ -189,6 +234,8 @@ function App() {
       window.removeEventListener('resize', updateActiveSection)
     }
   }, [])
+
+  const visibleProjects = showAllProjects ? projectCards : projectCards.slice(0, PROJECTS_PREVIEW_COUNT)
 
   return (
     <div className="site-shell">
@@ -251,7 +298,7 @@ function App() {
         </nav>
 
         <section className="hero-grid">
-          <div className="hero-copy">
+          <div className="hero-copy hero-copy-expanded">
             <span className="eyebrow">UNC Chapel Hill • Computer Science • Economics • Public Policy</span>
             <h1>
               Building products, teams, and ideas that feel <span>clear</span>, <span>useful</span>, and credible.
@@ -282,51 +329,10 @@ function App() {
               ))}
             </div>
           </div>
-
-          <aside className="hero-side reveal-card">
-            <div className="side-label">Now</div>
-            <h3>What this site is designed to show</h3>
-            <ul>
-              <li>Technical projects with real user and stakeholder context</li>
-              <li>Leadership experience that goes beyond just club membership</li>
-              <li>A profile that feels strong to both engineers and business recruiters</li>
-            </ul>
-            <div className="hero-side-divider" />
-            <p>
-              This version uses a darker visual system, clearer hierarchy, and more polished
-              project framing so it feels closer to an internship candidate site than a class portfolio.
-            </p>
-          </aside>
         </section>
       </header>
 
       <main className="main-content">
-        <section className="content-section" id="about">
-          <SectionIntro
-            eyebrow="About"
-            title="A profile built around execution, communication, and range."
-            copy="I like work that sits at the intersection of product thinking, technical problem-solving, and real-world usefulness. The through-line across my projects is simple: I want the end result to make sense to the people using it."
-          />
-
-          <div className="about-grid">
-            <article className="info-card reveal-card">
-              <h3>How I’m positioned</h3>
-              <p>
-                My experience spans software, finance, outreach, and operations, which lets me work comfortably with both technical teams and non-technical stakeholders. That mix shows up in the way I build interfaces, explain ideas, and organize projects.
-              </p>
-            </article>
-            <article className="info-card reveal-card emphasis-card">
-              <h3>What I bring</h3>
-              <div className="bullet-stack">
-                <div><span className="dot" />Strong presentation and stakeholder communication</div>
-                <div><span className="dot" />Comfort with both code and execution details</div>
-                <div><span className="dot" />Leadership experience with visible ownership</div>
-                <div><span className="dot" />A practical, polished style of shipping work</div>
-              </div>
-            </article>
-          </div>
-        </section>
-
         <section className="content-section" id="experience">
           <SectionIntro
             eyebrow="Experience"
@@ -360,11 +366,11 @@ function App() {
           <SectionIntro
             eyebrow="Projects"
             title="Selected work with a cleaner, more product-focused presentation."
-            copy="These cards are written to scan well for recruiters while still giving enough context for someone technical to understand the stack and intent."
+            copy="Each card opens into more detail, including a photo gallery as project images are added."
           />
 
           <div className="project-showcase">
-            {projectCards.map((project, index) => (
+            {visibleProjects.map((project, index) => (
               <article key={project.title} className={`project-card reveal-card ${index === 0 ? 'project-featured' : ''}`}>
                 <div className="project-visual">
                   <div className="window-bar">
@@ -393,17 +399,26 @@ function App() {
                     ))}
                   </div>
                   <div className="project-actions">
-                    <a href={project.primaryLink} className="btn btn-primary" target={project.primaryLink.startsWith('http') ? '_blank' : undefined} rel={project.primaryLink.startsWith('http') ? 'noreferrer' : undefined}>
-                      {project.primaryLink.startsWith('http') ? 'View project' : 'Contact me'}
-                    </a>
-                    <a href={project.secondaryLink} className="btn btn-secondary">
-                      {project.secondaryLabel}
-                    </a>
+                    <button type="button" className="btn btn-primary" onClick={() => setActiveProject(project)}>
+                      View project
+                    </button>
                   </div>
                 </div>
               </article>
             ))}
           </div>
+
+          {projectCards.length > PROJECTS_PREVIEW_COUNT ? (
+            <div className="section-more">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => setShowAllProjects((open) => !open)}
+              >
+                {showAllProjects ? 'Show fewer projects' : `View all ${projectCards.length} projects`}
+              </button>
+            </div>
+          ) : null}
         </section>
 
         <section className="content-section" id="leadership">
@@ -419,6 +434,15 @@ function App() {
                 <span className="eyebrow">{item.role}</span>
                 <h3>{item.title}</h3>
                 <p>{item.copy}</p>
+                {item.gallery && item.gallery.length > 0 ? (
+                  <button
+                    type="button"
+                    className="btn btn-secondary leader-gallery-btn"
+                    onClick={() => setActiveLeader(item)}
+                  >
+                    View photos
+                  </button>
+                ) : null}
               </article>
             ))}
           </div>
@@ -466,6 +490,50 @@ function App() {
           </article>
         </section>
       </main>
+
+      {activeProject ? (
+        <Modal onClose={() => setActiveProject(null)} labelledBy="project-modal-title">
+          <span className="eyebrow">{activeProject.eyebrow}</span>
+          <h2 id="project-modal-title">{activeProject.title}</h2>
+          <p>{activeProject.summary}</p>
+          <strong className="impact-line">{activeProject.impact}</strong>
+          <div className="tag-row">
+            {activeProject.tech.map((tech) => (
+              <span key={tech} className="tag">{tech}</span>
+            ))}
+          </div>
+          {activeProject.link ? (
+            <a
+              href={activeProject.link}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-secondary modal-link"
+            >
+              {activeProject.linkLabel || 'View project'}
+            </a>
+          ) : null}
+          {activeProject.gallery && activeProject.gallery.length > 0 ? (
+            <div className="modal-gallery">
+              {activeProject.gallery.map((src, index) => (
+                <img key={src} src={src} alt={`${activeProject.title} screenshot ${index + 1}`} />
+              ))}
+            </div>
+          ) : null}
+        </Modal>
+      ) : null}
+
+      {activeLeader ? (
+        <Modal onClose={() => setActiveLeader(null)} labelledBy="leader-modal-title">
+          <span className="eyebrow">{activeLeader.role}</span>
+          <h2 id="leader-modal-title">{activeLeader.title}</h2>
+          <p>{activeLeader.copy}</p>
+          <div className="modal-gallery">
+            {activeLeader.gallery.map((src, index) => (
+              <img key={src} src={src} alt={`${activeLeader.title} photo ${index + 1}`} />
+            ))}
+          </div>
+        </Modal>
+      ) : null}
     </div>
   )
 }
