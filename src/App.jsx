@@ -57,14 +57,14 @@ const experienceItems = [
 // `gallery` accepts image paths (e.g. from /public/gallery/...) and renders inside the project modal once populated.
 const projectCards = [
   {
-    title: 'CollegeConnect',
-    eyebrow: 'Featured project',
+    title: 'EvasionBench',
+    eyebrow: 'AI in the Business World Capstone',
     summary:
-      'A React platform designed to help high-school students, especially first-generation and under-resourced students, navigate the college application process through guidance, resources, and mentorship.',
-    impact: 'Mission-driven product design for education access',
-    tech: ['React', 'Vite', 'React Router', 'Responsive CSS'],
-    link: 'https://github.com/svastani28/cssg-CollegeConnect',
-    linkLabel: 'View repo',
+      'A benchmark and labeling framework for detecting evasive executive responses in public company earnings call Q&A, built with a hand-labeled dataset, a scoring codebook, and a champion model evaluated against a held-out test set.',
+    impact: 'NLP-driven evasion detection for earnings call transcripts',
+    tech: ['Python', 'NLP', 'LLM Prompting', 'Data Labeling'],
+    link: null,
+    linkLabel: null,
     gallery: [],
   },
   {
