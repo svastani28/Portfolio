@@ -66,7 +66,6 @@ const projectCards = [
     link: null,
     linkLabel: null,
     gallery: [
-      `${import.meta.env.BASE_URL}gallery/evasionbench/evasionbench-01-title.png`,
       `${import.meta.env.BASE_URL}gallery/evasionbench/evasionbench-02-solution.png`,
       `${import.meta.env.BASE_URL}gallery/evasionbench/evasionbench-03-genai-benchmark.png`,
       `${import.meta.env.BASE_URL}gallery/evasionbench/evasionbench-04-results.png`,
@@ -182,7 +181,7 @@ function SectionIntro({ eyebrow, title, copy }) {
   )
 }
 
-function Modal({ onClose, children, labelledBy }) {
+function Modal({ onClose, children, labelledBy, ariaLabel, variant }) {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') onClose()
@@ -201,10 +200,11 @@ function Modal({ onClose, children, labelledBy }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div
-        className="modal-panel reveal-card"
+        className={`modal-panel reveal-card${variant ? ` modal-panel--${variant}` : ''}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelledBy}
+        aria-label={ariaLabel}
         onClick={(event) => event.stopPropagation()}
       >
         <button type="button" className="modal-close" onClick={onClose} aria-label="Close">
@@ -216,12 +216,34 @@ function Modal({ onClose, children, labelledBy }) {
   )
 }
 
+function GalleryGrid({ images, altPrefix, onSelect }) {
+  return (
+    <div className="modal-gallery">
+      {images.map((src, index) => {
+        const alt = `${altPrefix} ${index + 1}`
+        return (
+          <button
+            key={src}
+            type="button"
+            className="modal-gallery-item"
+            onClick={() => onSelect({ src, alt })}
+            aria-label={`Expand ${alt}`}
+          >
+            <img src={src} alt={alt} loading="lazy" />
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
 function App() {
   const [activeSection, setActiveSection] = useState(navLinks[0].href.replace('#', ''))
   const [resumeMenuOpen, setResumeMenuOpen] = useState(false)
   const [activeProject, setActiveProject] = useState(null)
   const [activeLeader, setActiveLeader] = useState(null)
   const [showAllProjects, setShowAllProjects] = useState(false)
+  const [lightboxImage, setLightboxImage] = useState(null)
 
   useEffect(() => {
     const sectionIds = navLinks.map((item) => item.href.replace('#', ''))
@@ -534,11 +556,11 @@ function App() {
             </a>
           ) : null}
           {activeProject.gallery && activeProject.gallery.length > 0 ? (
-            <div className="modal-gallery">
-              {activeProject.gallery.map((src, index) => (
-                <img key={src} src={src} alt={`${activeProject.title} screenshot ${index + 1}`} />
-              ))}
-            </div>
+            <GalleryGrid
+              images={activeProject.gallery}
+              altPrefix={`${activeProject.title} screenshot`}
+              onSelect={setLightboxImage}
+            />
           ) : null}
         </Modal>
       ) : null}
@@ -548,11 +570,17 @@ function App() {
           <span className="eyebrow">{activeLeader.role}</span>
           <h2 id="leader-modal-title">{activeLeader.title}</h2>
           <p>{activeLeader.copy}</p>
-          <div className="modal-gallery">
-            {activeLeader.gallery.map((src, index) => (
-              <img key={src} src={src} alt={`${activeLeader.title} photo ${index + 1}`} />
-            ))}
-          </div>
+          <GalleryGrid
+            images={activeLeader.gallery}
+            altPrefix={`${activeLeader.title} photo`}
+            onSelect={setLightboxImage}
+          />
+        </Modal>
+      ) : null}
+
+      {lightboxImage ? (
+        <Modal onClose={() => setLightboxImage(null)} ariaLabel={lightboxImage.alt} variant="image">
+          <img src={lightboxImage.src} alt={lightboxImage.alt} />
         </Modal>
       ) : null}
     </div>
