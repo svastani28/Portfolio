@@ -87,8 +87,8 @@ const experienceItems = [
 // `gallery` accepts image paths (e.g. from /public/gallery/...) and renders inside the project modal once populated.
 const projectCards = [
   {
-    title: 'EvasionBench',
-    eyebrow: 'AI in the Business World Capstone',
+    title: 'EvasionBench Capstone',
+    eyebrow: 'Comp 488 AI in the Business World',
     summary:
       'A benchmark and labeling framework for detecting evasive executive responses in public company earnings call Q&A, built with a hand-labeled dataset, a scoring codebook, and a champion model evaluated against a held-out test set.',
     impact: 'NLP-driven evasion detection for earnings call transcripts',
@@ -102,8 +102,8 @@ const projectCards = [
     ],
   },
   {
-    title: 'The YETI Case',
-    eyebrow: 'AI in the Business World Capstone',
+    title: 'Yeti Case Study',
+    eyebrow: 'Comp 488 AI in the Business World',
     summary:
       'A strategic case analysis proposing a unified AI customer-experience strategy for YETI, consolidating two competing AI assistants into a single flow-based agent with a phased backend, UI, and rollout implementation plan.',
     impact: 'AI strategy & UX consolidation with projected ROI modeling',
