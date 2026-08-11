@@ -65,7 +65,28 @@ const projectCards = [
     tech: ['Python', 'NLP', 'LLM Prompting', 'Data Labeling'],
     link: null,
     linkLabel: null,
-    gallery: [],
+    gallery: [
+      `${import.meta.env.BASE_URL}gallery/evasionbench/evasionbench-01-title.png`,
+      `${import.meta.env.BASE_URL}gallery/evasionbench/evasionbench-02-solution.png`,
+      `${import.meta.env.BASE_URL}gallery/evasionbench/evasionbench-03-genai-benchmark.png`,
+      `${import.meta.env.BASE_URL}gallery/evasionbench/evasionbench-04-results.png`,
+    ],
+  },
+  {
+    title: 'The YETI Case',
+    eyebrow: 'AI in the Business World Capstone',
+    summary:
+      'A strategic case analysis proposing a unified AI customer-experience strategy for YETI, consolidating two competing AI assistants into a single flow-based agent with a phased backend, UI, and rollout implementation plan.',
+    impact: 'AI strategy & UX consolidation with projected ROI modeling',
+    tech: ['Product Strategy', 'AI/UX Design', 'Business Case Modeling'],
+    link: null,
+    linkLabel: null,
+    gallery: [
+      `${import.meta.env.BASE_URL}gallery/yeti-case/yeti-case-01-title.png`,
+      `${import.meta.env.BASE_URL}gallery/yeti-case/yeti-case-02-recommendation.png`,
+      `${import.meta.env.BASE_URL}gallery/yeti-case/yeti-case-03-implementation.png`,
+      `${import.meta.env.BASE_URL}gallery/yeti-case/yeti-case-04-business-impact.png`,
+    ],
   },
   {
     title: 'Pauli Murray Interactive Tour',
