@@ -2,10 +2,40 @@ import { useEffect, useState } from 'react'
 import './index.css'
 
 const navLinks = [
+  { label: 'About', href: '#about' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
   { label: 'Leadership', href: '#leadership' },
+  { label: 'Strengths', href: '#strengths' },
   { label: 'Contact', href: '#contact' },
+]
+
+const strengthItems = [
+  {
+    title: 'Strategic',
+    description:
+      "As a strategic thinker, I always have at least three options in mind so I can adapt if circumstances change. I'm efficient by nature and willing to take calculated risks to help others succeed.",
+  },
+  {
+    title: 'Deliberative',
+    description:
+      "I'm thorough, and I take the time to carefully research a problem before arriving at a solution. I'm naturally curious and ask well-thought-out questions — and I'm also a good listener, often helping others think through issues by considering different perspectives.",
+  },
+  {
+    title: 'Analytical',
+    description:
+      'I ask well-researched, in-depth questions that often lead others to their own discoveries. My academic and project work is always grounded in gathering the full picture before drawing conclusions.',
+  },
+  {
+    title: 'Relator',
+    description:
+      'I prefer smaller groups and close-knit collaboration, and I build strong relationships and trust with the people I work with — which tends to earn a lot of respect in return.',
+  },
+  {
+    title: 'Learner',
+    description:
+      'I love the process of learning and building routines around it. Figuring out how to acquire new information efficiently comes naturally to me.',
+  },
 ]
 
 const resumeLinks = [
@@ -376,6 +406,30 @@ function App() {
       </header>
 
       <main className="main-content">
+        <section className="content-section" id="about">
+          <SectionIntro
+            eyebrow="About"
+            title="Student, entrepreneur, mentor."
+            copy="The values behind how I lead, build, and work with others."
+          />
+
+          <article className="about-card reveal-card">
+            <p>
+              I'm a junior at UNC Chapel Hill studying Computer Science &amp; Economics, and across
+              every team I'm part of — product, classroom, or community — I keep coming back to the
+              same throughline: trust and communication are what let people actually get things
+              done together. That belief shapes how I show up as a leader, a builder, and a mentor.
+            </p>
+            <p>
+              I care about creating space for honest, open dialogue, because that's what turns a
+              group of individuals into a team that trusts each other enough to move fast. Whether
+              I'm leading HackNC's organizing team, mentoring students through Apollo Aspire, or
+              building software for a UNC department, the goal is the same: use structure and
+              communication to make good work easier for everyone involved.
+            </p>
+          </article>
+        </section>
+
         <section className="content-section" id="experience">
           <SectionIntro
             eyebrow="Experience"
@@ -506,6 +560,23 @@ function App() {
                   ))}
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="content-section" id="strengths">
+          <SectionIntro
+            eyebrow="Strengths"
+            title="Top 5 CliftonStrengths, from a Gallup assessment."
+            copy="The traits that show up most consistently in how I think, lead, and work with others."
+          />
+          <div className="strengths-grid">
+            {strengthItems.map((item, index) => (
+              <article key={item.title} className="strength-card reveal-card">
+                <span className="strength-rank">{String(index + 1).padStart(2, '0')}</span>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
             ))}
           </div>
         </section>

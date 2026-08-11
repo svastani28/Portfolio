@@ -216,7 +216,9 @@ a {
 .leader-card,
 .skills-cloud,
 .contact-card,
-.stat-panel {
+.stat-panel,
+.about-card,
+.strength-card {
   border: 1px solid rgba(148, 163, 184, 0.12);
   background: linear-gradient(180deg, rgba(12, 18, 31, 0.88), rgba(7, 10, 18, 0.94));
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
@@ -228,7 +230,8 @@ a {
 .timeline-item,
 .project-card,
 .leader-card,
-.contact-card {
+.contact-card,
+.about-card {
   border-radius: 32px;
 }
 
@@ -275,7 +278,9 @@ a {
 .project-content p,
 .leader-card p,
 .contact-card p,
-.stat-panel span {
+.stat-panel span,
+.about-card p,
+.strength-card p {
   color: #9fb0c8;
 }
 
@@ -348,7 +353,8 @@ a {
 .timeline-meta h3,
 .project-content h3,
 .leader-card h3,
-.contact-card h2 {
+.contact-card h2,
+.strength-card h3 {
   margin: 0;
   letter-spacing: -0.03em;
 }
@@ -377,7 +383,9 @@ a {
 .timeline-copy p,
 .project-content p,
 .leader-card p,
-.contact-card p {
+.contact-card p,
+.about-card p,
+.strength-card p {
   line-height: 1.75;
 }
 
@@ -400,6 +408,34 @@ a {
 .leader-gallery-btn {
   margin-top: 1rem;
   align-self: flex-start;
+}
+
+.about-card {
+  padding: 2rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.strengths-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+
+.strength-card {
+  padding: 1.6rem;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.strength-rank {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #7dd3fc;
 }
 
 .timeline-list {
@@ -798,11 +834,13 @@ a {
   .timeline-item,
   .project-card,
   .leader-card,
-  .contact-card {
+  .contact-card,
+  .about-card {
     border-radius: 26px;
   }
 
-  .hero-copy {
+  .hero-copy,
+  .about-card {
     padding: 1.5rem;
   }
 
