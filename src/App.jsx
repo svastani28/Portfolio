@@ -201,6 +201,61 @@ const skillGroups = [
   },
 ]
 
+function ProjectVisual({ project }) {
+  const images = project.gallery || []
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  useEffect(() => {
+    if (images.length < 2) return undefined
+
+    const interval = setInterval(() => {
+      setActiveIndex((current) => (current + 1) % images.length)
+    }, 3500)
+
+    return () => clearInterval(interval)
+  }, [images.length])
+
+  return (
+    <div className="project-visual">
+      <div className="window-bar">
+        <span />
+        <span />
+        <span />
+      </div>
+      {images.length > 0 ? (
+        <div className="visual-gallery">
+          {images.map((src, index) => (
+            <img
+              key={src}
+              src={src}
+              alt={`${project.title} preview ${index + 1}`}
+              className={`visual-gallery-slide${index === activeIndex ? ' is-active' : ''}`}
+              loading="lazy"
+            />
+          ))}
+          {images.length > 1 ? (
+            <div className="visual-gallery-dots">
+              {images.map((src, index) => (
+                <span key={src} className={index === activeIndex ? 'is-active' : ''} />
+              ))}
+            </div>
+          ) : null}
+        </div>
+      ) : (
+        <div className="mockup-body">
+          <div className="mockup-line short" />
+          <div className="mockup-line medium" />
+          <div className="mockup-grid">
+            <div />
+            <div />
+            <div />
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 function SectionIntro({ eyebrow, title, copy }) {
   return (
     <div className="section-intro">
@@ -469,22 +524,7 @@ function App() {
           <div className="project-showcase">
             {visibleProjects.map((project, index) => (
               <article key={project.title} className={`project-card reveal-card ${index === 0 ? 'project-featured' : ''}`}>
-                <div className="project-visual">
-                  <div className="window-bar">
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-                  <div className="mockup-body">
-                    <div className="mockup-line short" />
-                    <div className="mockup-line medium" />
-                    <div className="mockup-grid">
-                      <div />
-                      <div />
-                      <div />
-                    </div>
-                  </div>
-                </div>
+                <ProjectVisual project={project} />
                 <div className="project-content">
                   <span className="eyebrow">{project.eyebrow}</span>
                   <h3>{project.title}</h3>
