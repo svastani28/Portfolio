@@ -135,9 +135,24 @@ const projectCards = [
       'An interactive educational platform for a UNC department focused on improving engagement, structuring information clearly, and making learning experiences more approachable.',
     impact: 'Interactive learning system for real users',
     tech: ['React', 'Firestore', 'Storage', 'Node.js'],
-    link: null,
-    linkLabel: null,
-    gallery: [],
+    link: 'https://github.com/cssgunc/Ethics-Bowl-Academy',
+    linkLabel: 'View repo',
+    gallery: [
+      `${import.meta.env.BASE_URL}gallery/parr-center/parr-center-01-homepage.png`,
+      `${import.meta.env.BASE_URL}gallery/parr-center/parr-center-02-resources-step.png`,
+    ],
+    contributions: [
+      {
+        ticket: '#88',
+        title: 'Built the Additional Resources step — attach multiple PDFs/links to any module step, plus search across past uploads',
+        url: 'https://github.com/cssgunc/Ethics-Bowl-Academy/issues/88',
+      },
+      {
+        ticket: '#85',
+        title: 'Updated and resized the new UNC Parr Center logos across the platform',
+        url: 'https://github.com/cssgunc/Ethics-Bowl-Academy/issues/85',
+      },
+    ],
   },
 ]
 
@@ -672,6 +687,21 @@ function App() {
               altPrefix={`${activeProject.title} screenshot`}
               onSelect={setLightboxImage}
             />
+          ) : null}
+          {activeProject.contributions && activeProject.contributions.length > 0 ? (
+            <div className="modal-contributions">
+              <span className="eyebrow">Tickets I completed</span>
+              <ul className="contribution-list">
+                {activeProject.contributions.map((item) => (
+                  <li key={item.ticket}>
+                    <a href={item.url} target="_blank" rel="noreferrer">
+                      <span className="contribution-ticket">{item.ticket}</span>
+                      <span>{item.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ) : null}
         </Modal>
       ) : null}
