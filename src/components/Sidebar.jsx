@@ -1,4 +1,4 @@
-import { navLinks, profile, resumeLinks } from '../data/content'
+import { navLinks, profile } from '../data/content'
 import { GitHubIcon, LinkedInIcon } from './Icons'
 
 export default function Sidebar({ activeSection }) {
@@ -44,13 +44,6 @@ export default function Sidebar({ activeSection }) {
             <LinkedInIcon />
           </a>
         </li>
-        {resumeLinks.map((item) => (
-          <li key={item.label}>
-            <a href={item.href} target="_blank" rel="noreferrer" className="social-text">
-              {item.label.replace(' Resume', '')} résumé
-            </a>
-          </li>
-        ))}
       </ul>
     </header>
   )
