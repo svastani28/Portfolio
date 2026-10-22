@@ -766,11 +766,27 @@ strong {
     width: 48%;
     max-height: 100vh;
     height: 100vh;
-    padding: 6rem 0;
+    padding: clamp(1.5rem, 8vh, 6rem) 0;
+    gap: 1.5rem;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .sidebar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sidebar-name {
+    font-size: clamp(2rem, 3.5vw, 3rem);
   }
 
   .side-nav {
     display: block;
+    margin-top: clamp(1.5rem, 6vh, 4rem);
+  }
+
+  .side-nav-link {
+    padding: clamp(0.35rem, 1.2vh, 0.75rem) 0;
   }
 
   .social-list {
