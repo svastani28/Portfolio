@@ -1,13 +1,12 @@
 # Sanay Portfolio Site
 
-A GitHub-ready React + Vite portfolio site inspired by the structure of your current Wix portfolio and the clean project-first organization of your CollegeConnect project.
-
 ## Sections included
 - About
-- Personal Strengths
 - Experience
 - Projects
-- Gallery of Accomplishments
+- Leadership
+- Personal Strengths
+- Gallery of Accomplishments (coming soon)
 - Contact
 
 ## Local setup
@@ -31,16 +30,3 @@ This repo already includes a GitHub Actions workflow in `.github/workflows/deplo
 4. Push to `main`.
 5. Wait for the workflow to finish.
 6. Your site will be published at the GitHub Pages URL for the repo.
-
-## Important edits to make before publishing
-- Replace `your-email@unc.edu` in `src/App.jsx`
-- Replace the LinkedIn and GitHub links in `src/App.jsx`
-- Add your real resume PDF to `public/resume.pdf`
-- Replace placeholder gallery items and images
-- Update project links where needed
-
-## Suggested repo name
-- `sanay-portfolio`
-- `portfolio-site`
-
-If you want the site to live at a custom domain later, you can add that in GitHub Pages settings after deployment.
