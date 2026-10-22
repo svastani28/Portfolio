@@ -13,26 +13,57 @@ const navLinks = [
 const strengthItems = [
   {
     title: 'Strategic',
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="m15.5 8.5-2 5-5 2 2-5z" />
+      </>
+    ),
     description:
       "As a strategic thinker, I always have at least three options in mind so I can adapt if circumstances change. I'm efficient by nature and willing to take calculated risks to help others succeed.",
   },
   {
     title: 'Deliberative',
+    icon: (
+      <>
+        <circle cx="10.5" cy="10.5" r="6" />
+        <path d="m15 15 5 5" />
+      </>
+    ),
     description:
       "I'm thorough, and I take the time to carefully research a problem before arriving at a solution. I'm naturally curious and ask well-thought-out questions — and I'm also a good listener, often helping others think through issues by considering different perspectives.",
   },
   {
     title: 'Analytical',
+    icon: (
+      <>
+        <path d="M4 20h16" />
+        <path d="M7 16v-4M12 16V7M17 16v-6" />
+      </>
+    ),
     description:
       'I ask well-researched, in-depth questions that often lead others to their own discoveries. My academic and project work is always grounded in gathering the full picture before drawing conclusions.',
   },
   {
     title: 'Relator',
+    icon: (
+      <>
+        <circle cx="9" cy="8" r="3" />
+        <circle cx="16.5" cy="9.5" r="2.5" />
+        <path d="M3.5 19a5.5 5.5 0 0 1 11 0M14.5 19a4 4 0 0 1 6-3.5" />
+      </>
+    ),
     description:
       'I prefer smaller groups and close-knit collaboration, and I build strong relationships and trust with the people I work with — which tends to earn a lot of respect in return.',
   },
   {
     title: 'Learner',
+    icon: (
+      <>
+        <path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z" />
+        <path d="M12 6.5v13" />
+      </>
+    ),
     description:
       'I love the process of learning and building routines around it. Figuring out how to acquire new information efficiently comes naturally to me.',
   },
@@ -49,6 +80,14 @@ const highlightCards = [
 ]
 
 const experienceItems = [
+  {
+    period: 'September 2026 – Present',
+    company: 'UNC Chapel Hill • Kenan-Flagler Business School',
+    role: 'Student IT Apprentice',
+    description:
+      'Working as a student IT apprentice at the Kenan-Flagler Business School, I am responsible for providing technical support to students and faculty, maintaining the school’s IT infrastructure, and assisting with the development of new technology solutions.',
+    tags: ['Technical support', 'IT infrastructure', 'Technology solutions'],
+  },
   {
     period: 'May 2026 – July 2026',
     company: 'HIVE Financial Systems',
@@ -158,44 +197,84 @@ const projectCards = [
 
 const PROJECTS_PREVIEW_COUNT = 3
 
-// `gallery` accepts image paths for each role — populate to surface a "View photos" button and modal automatically.
+// `roles` lists positions within the same organization, most recent first (LinkedIn-style).
+// `gallery` accepts image paths for each organization — populate to surface a "View photos" button and modal automatically.
 const leadershipItems = [
   {
     title: 'HackNC',
-    role: 'Co-Lead (President) | March 2025 – Present',
-    copy:
-      'Leading a 20+ member organizing team across logistics, marketing, sponsorship, and execution for UNC’s flagship 500+ participant hackathon, driving sponsor outreach that secured over $30k in corporate and university funding.',
+    copy: 'UNC Chapel Hill’s annual student-run hackathon, bringing together 500+ participants each year. One of the largest collegiate hackathons in the Southeast! ',
+    roles: [
+      {
+        title: 'Co-Lead Director (President)',
+        period: 'January 2026 – Present',
+        copy:
+          'Leading a 20+ member organizing team across recruitment, logistics, marketing, and sponsorship. Owning funding strategy and sponsor relationships, securing over $30k in corporate and university funding.',
+      },
+      {
+        title: 'Director of Event Operations',
+        period: 'March 2025 – December 2025',
+        copy:
+          'Ran end-to-end logistics for the 500+ participant event, including venue setup, transportation, accommodations, and catering, coordinating with volunteers, sponsors, university departments, and vendors.',
+      },
+    ],
     gallery: [],
   },
   {
     title: 'UNC CS + Social Good',
-    role: 'VP of Outreach and Project Team | September 2025 – Present',
     copy:
-      'Leading outreach, external relations, social media, and budget planning for 100+ members, and building interactive educational platforms for UNC departments — including the Parr Center and Pauli Murray Center — using Claude Code, React, TypeScript, Firebase, and Node.js.',
+      'A 100+ member student organization that builds web platforms for UNC departments and community partners, and teaches students web development.',
+    roles: [
+      {
+        title: 'Co-President',
+        period: 'September 2026 – Present',
+        copy:
+          'Co-leading the organization and its project, education, and outreach teams.',
+      },
+      {
+        title: 'Project Team Member',
+        period: 'January 2026 – Present',
+        copy:
+          'Building a client-facing web platform for UNC’s Parr Center for Ethics, turning stakeholder needs into accessible, scalable features with React, TypeScript, Firebase, and Node.js.',
+      },
+      {
+        title: 'VP of Outreach & Events',
+        period: 'January 2026 – September 2026',
+        copy:
+          'Oversaw outreach, external relations, social media, and budget planning, working with campus and departmental partners.',
+      },
+      {
+        title: 'Education Team Member',
+        period: 'September 2025 – January 2026',
+        copy:
+          'Learned HTML, CSS, JavaScript, React, and Git through weekly workshops and mentorship, finishing with a React project that integrated APIs, databases, and accessible design.',
+      },
+    ],
     gallery: [],
   },
   {
     title: 'Apollo Aspire',
-    role: 'Mentor | December 2024 – Present',
+    roles: [{ title: 'Mentor', period: 'December 2024 – Present' }],
     copy:
       'Coaching low-income students through the college application process, including essay editing, financial aid guidance, and application submission.',
     gallery: [],
   },
   {
     title: 'Aga Khan Development Network (AKDN)',
-    role: 'Youth Team Leader | August 2020 – 2024',
+    roles: [{ title: 'Youth Team Leader', period: 'August 2020 – 2024' }],
     copy:
       'Led 100+ volunteers ages 8–18 to organize youth activities and manage events serving 5,000 people every weekend.',
     gallery: [],
   },
   {
     title: 'Coded for Africa',
-    role: 'Founder | August 2020 – Present',
+    roles: [{ title: 'Founder', period: 'August 2020 – Present' }],
     copy:
       'Built a program to help 200+ students in Nairobi develop their interest in technology, and partnered with IBM to bring Cloud Certification programs to Jaffery Academy and Aga Khan Education Services of Kenya.',
     gallery: [],
   },
 ]
+
+const formatRole = (role) => (role.period ? `${role.title} | ${role.period}` : role.title)
 
 const skillGroups = [
   {
@@ -503,8 +582,8 @@ function App() {
         <section className="content-section" id="experience">
           <SectionIntro
             eyebrow="Experience"
-            title="Internships that show both technical depth and business fluency."
-            copy="The strongest signal here is range: engineering, analytics, capital markets, and operational work across very different environments."
+            title="Product, data, and engineering roles across FinTech, aerospace, and campus IT."
+            copy="Internships and part-time work, most recent first. Each role lists what I owned and the tools I used."
           />
 
           <div className="timeline-list">
@@ -532,8 +611,7 @@ function App() {
         <section className="content-section" id="projects">
           <SectionIntro
             eyebrow="Projects"
-            title="Selected work with a cleaner, more product-focused presentation."
-            copy="Each card opens into more detail, including a photo gallery as project images are added."
+            title="Software for real clients, plus AI and strategy coursework."
           />
 
           <div className="project-showcase">
@@ -576,16 +654,39 @@ function App() {
         <section className="content-section" id="leadership">
           <SectionIntro
             eyebrow="Leadership"
-            title="The part that makes the profile more memorable."
-            copy="For internship recruiting, this section helps show that I can do more than contribute individually. I can also coordinate, represent, and lead."
+            title="Organizations I’ve joined, grown with, and now help lead."
           />
 
           <div className="leadership-grid">
             {leadershipItems.map((item) => (
               <article key={item.title} className="leader-card reveal-card">
-                <span className="eyebrow">{item.role}</span>
-                <h3>{item.title}</h3>
-                <p>{item.copy}</p>
+                {item.roles.length === 1 ? (
+                  <>
+                    <span className="eyebrow">{formatRole(item.roles[0])}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.copy}</p>
+                  </>
+                ) : (
+                  <>
+                    <h3>{item.title}</h3>
+                    <span className="leader-role-count">{item.roles.length} roles</span>
+                    <p className="leader-org-copy">{item.copy}</p>
+                    <ol className="leader-roles">
+                      {item.roles.map((role) => (
+                        <li
+                          key={role.title}
+                          className={role.period.endsWith('Present') ? 'leader-role is-current' : 'leader-role'}
+                        >
+                          <span className="leader-role-title">{role.title}</span>
+                          {role.period ? (
+                            <span className="leader-role-period">{role.period}</span>
+                          ) : null}
+                          {role.copy ? <p className="leader-role-copy">{role.copy}</p> : null}
+                        </li>
+                      ))}
+                    </ol>
+                  </>
+                )}
                 {item.gallery && item.gallery.length > 0 ? (
                   <button
                     type="button"
@@ -628,7 +729,21 @@ function App() {
           <div className="strengths-grid">
             {strengthItems.map((item, index) => (
               <article key={item.title} className="strength-card reveal-card">
-                <span className="strength-rank">{String(index + 1).padStart(2, '0')}</span>
+                <div className="strength-head">
+                  <svg
+                    className="strength-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    {item.icon}
+                  </svg>
+                  <span className="strength-rank">#{index + 1}</span>
+                </div>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
               </article>
@@ -640,14 +755,19 @@ function App() {
           <article className="contact-card reveal-card">
             <span className="eyebrow">Contact</span>
             <h2>Let’s connect.</h2>
-            <p>
-              I’m especially interested in internship opportunities where product sense,
-              technical ability, and communication all matter.
-            </p>
             <div className="contact-links">
-              <a href="mailto:sanayvastani24@gmail.com">Email</a>
-              <a href="https://www.linkedin.com/in/sanayvastani" target="_blank" rel="noreferrer">LinkedIn</a>
-              <a href="https://github.com/svastani28" target="_blank" rel="noreferrer">GitHub</a>
+              <a href="https://www.linkedin.com/in/sanayvastani" target="_blank" rel="noreferrer">
+                <svg className="contact-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.889 1.637-1.479 2.758-1.479 3.6 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+                LinkedIn
+              </a>
+              <a href="https://github.com/svastani28" target="_blank" rel="noreferrer">
+                <svg className="contact-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+                GitHub
+              </a>
             </div>
             <div className="contact-links contact-resumes">
               {resumeLinks.map((item) => (
@@ -708,7 +828,7 @@ function App() {
 
       {activeLeader ? (
         <Modal onClose={() => setActiveLeader(null)} labelledBy="leader-modal-title">
-          <span className="eyebrow">{activeLeader.role}</span>
+          <span className="eyebrow">{formatRole(activeLeader.roles[0])}</span>
           <h2 id="leader-modal-title">{activeLeader.title}</h2>
           <p>{activeLeader.copy}</p>
           <GalleryGrid
