@@ -62,8 +62,7 @@ export const projectCards = [
   {
     title: 'EvasionBench',
   eyebrow: 'Capstone · NLP for earnings calls',
-  summary:
-    'Built a classifier that flags evasive executive answers on earnings calls. Our final model matched Gemini 3 Flash (0.869 vs. 0.870 macro-F1) at $0 API cost and about 16x the speed, tested on 1,200 hand-labeled Q&A pairs.',
+  summary:'Built a classifier that flags evasive executive answers on earnings calls. Our final model matched Gemini 3 Flash (0.869 vs. 0.870 macro-F1) with no per-call API fees and about 16x the speed, versus ~$1,366 per million answers for Gemini, tested on 1,200 hand-labeled Q&A pairs.',
   impact: 'Benchmarked 6 LLMs from 4 vendors, distilled the best into fine-tuned DeBERTa/RoBERTa models, and stacked them with a Random Forest. Human labels reached α = 0.89 agreement.',
   tech: ['Python', 'LLM APIs', 'DeBERTa / RoBERTa', 'scikit-learn', 'Cost modeling'],
   link: 'https://drive.google.com/drive/folders/19Y5MwH8UxAR8wcBS3Yo-dWtHNdB6T8w7',
