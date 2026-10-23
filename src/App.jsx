@@ -9,7 +9,7 @@ import {
   navLinks,
   projectCards,
   skillGroups,
-  strengthItems,
+  strengthsLine,
 } from './data/content'
 import useActiveSection from './hooks/useActiveSection'
 import useSpotlight from './hooks/useSpotlight'
@@ -83,8 +83,8 @@ function App() {
             </p>
             <p>
               My work spans a live agentic AI product dashboard at a consumer lending FinTech, predictive
-              credit models at a B2B FinTech, and 2 warehouse management systems in real-eastate and aerospace. These
-              days I lead <strong>HackNC</strong>, <strong>UNC CS + Social Good</strong>, while
+              credit models for ABS securitization at GreenSky, and a Java interface for a
+              Mach 5 aircraft. These days I lead <strong>HackNC</strong> and <strong>UNC CS + Social Good</strong>, while
               mentoring students through <strong>Apollo Aspire</strong> and <strong>Students 4 Students</strong>.
             </p>
             <p>
@@ -215,34 +215,7 @@ function App() {
                 </div>
               ))}
             </div>
-          </Section>
-
-          <Section id="strengths" label="Strengths">
-            <p className="section-lede">Top 5 CliftonStrengths, from a Gallup assessment.</p>
-            <ul className="strength-list">
-              {strengthItems.map((item, index) => (
-                <li key={item.title} className="strength">
-                  <svg
-                    className="strength-icon"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    {item.icon}
-                  </svg>
-                  <div>
-                    <h3>
-                      <span className="strength-rank">#{index + 1}</span> {item.title}
-                    </h3>
-                    <p>{item.description}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <p className="section-lede">{strengthsLine}</p>
           </Section>
 
           <Footer />

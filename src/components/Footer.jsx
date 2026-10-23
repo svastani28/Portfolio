@@ -4,7 +4,8 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <p>
-        Want to talk? Reach out on{' '}
+        Want to talk? Email me at{' '}
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>, reach out on{' '}
         <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a> or find my code on{' '}
         <a href={profile.github} target="_blank" rel="noreferrer">GitHub</a>.
       </p>

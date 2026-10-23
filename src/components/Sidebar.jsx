@@ -1,5 +1,5 @@
 import { navLinks, profile } from '../data/content'
-import { GitHubIcon, LinkedInIcon } from './Icons'
+import { GitHubIcon, LinkedInIcon, MailIcon } from './Icons'
 
 export default function Sidebar({ activeSection }) {
   return (
@@ -40,8 +40,18 @@ export default function Sidebar({ activeSection }) {
           </a>
         </li>
         <li>
+          <a href={`mailto:${profile.email}`} aria-label="Email" title="Email">
+            <MailIcon />
+          </a>
+        </li>
+        <li>
           <a href={profile.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn (opens in a new tab)" title="LinkedIn">
             <LinkedInIcon />
+          </a>
+        </li>
+        <li>
+          <a href={profile.resume} target="_blank" rel="noreferrer" className="social-text">
+            Résumé
           </a>
         </li>
       </ul>
