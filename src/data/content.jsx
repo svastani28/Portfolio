@@ -124,6 +124,28 @@ export const projectCards = [
     ],
   },
   {
+    title: 'Biomimetic Water Filtration',
+    eyebrow: 'APPL 101 · Biomimicry design report',
+    summary:
+      'Designed a passive, gravity-driven water filter modeled on natural filtration in sand beds, marine mucus nets, and bacterial biofilms. Five layers (gravel, coarse sand, fine sand, activated charcoal, micro-pore filter) trap progressively smaller contaminants with no electricity or specialized parts.',
+    impact: 'Low-cost, low-maintenance alternative to ~$2,500 home filtration systems, aimed at off-grid and low-resource communities',
+    tech: ['Biomimicry', 'Systems design', 'Simulation modeling', 'Technical writing'],
+    link: `${import.meta.env.BASE_URL}gallery/biomimicry/Biomimicry%20Report.docx`,
+    linkLabel: 'Read report',
+    gallery: [],
+  },
+  {
+    title: 'Bone-Crete',
+    eyebrow: 'APPL 101 · Team biomimicry project',
+    summary:
+      'Team project applying the porous trabecular structure of bone to concrete, which is heavy, material-intensive, and responsible for about 8% of global CO₂ emissions. 3D-printed PLA prototypes compared small-hole and large-hole designs, backed by a systems map, life cycle analysis, and People/Profit/Planet trade-off review.',
+    impact: 'Small-hole model had higher tensile strength; large-hole model confined fracture to a smaller region under impact',
+    tech: ['Biomimicry', '3D printing (PLA)', 'Life cycle analysis', 'Sustainability analysis'],
+    link: `${import.meta.env.BASE_URL}gallery/biomimicry/Sec1_Group13_FinalPresentation.pdf`,
+    linkLabel: 'View presentation',
+    gallery: [],
+  },
+  {
     title: 'Pauli Murray Interactive Tour',
     eyebrow: 'Client-facing work',
     summary:
