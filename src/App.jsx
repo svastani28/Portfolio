@@ -9,7 +9,8 @@ import {
   navLinks,
   projectCards,
   skillGroups,
-  strengthsLine,
+  strengths,
+  strengthsSource,
 } from './data/content'
 import useActiveSection from './hooks/useActiveSection'
 import useSpotlight from './hooks/useSpotlight'
@@ -215,7 +216,23 @@ function App() {
                 </div>
               ))}
             </div>
-            <p className="section-lede">{strengthsLine}</p>
+          </Section>
+
+          <Section id="strengths" label="Personal Strengths">
+            <p className="section-lede">{strengthsSource}</p>
+            <ol className="strength-list">
+              {strengths.map((item, index) => (
+                <li key={item.title} className="strength">
+                  <div>
+                    <h3>
+                      <span className="strength-rank">{String(index + 1).padStart(2, '0')}.</span>
+                      {item.title}
+                    </h3>
+                    <p>{item.copy}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </Section>
 
           <Footer />

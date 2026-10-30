@@ -4,9 +4,33 @@ export const navLinks = [
   { label: 'Projects', href: '#projects' },
   { label: 'Leadership', href: '#leadership' },
   { label: 'Skills', href: '#skills' },
+  { label: 'Strengths', href: '#strengths' },
 ]
 
-export const strengthsLine = 'CliftonStrengths: Strategic, Deliberative, Analytical, Relator, Learner.'
+export const strengthsSource = 'Top five strengths from the Gallup CliftonStrengths assessment.'
+
+export const strengths = [
+  {
+    title: 'Strategic',
+    copy: 'As a strategic thinker, I always have at least three options in mind so I can adapt if circumstances change. I am very efficient and take calculated risks to help others succeed.',
+  },
+  {
+    title: 'Deliberative',
+    copy: 'I am very thorough and take the time to carefully research a problem before arriving at a solution. Naturally, I am very curious and often ask a few well-thought-out questions. However, I am also a very good listener and often help others thoroughly think through issues by considering several different perspectives.',
+  },
+  {
+    title: 'Analytical',
+    copy: 'As an analytical person, I ask well-researched, in-depth questions that often lead others to self-discovery. My academic work is always well-researched by gathering all the possible data.',
+  },
+  {
+    title: 'Relator',
+    copy: 'I prefer smaller class sizes and close-knit group work while commanding respect around me. I also build strong relationships and trust with those I know.',
+  },
+  {
+    title: 'Learner',
+    copy: 'I love the process of learning and routines. Understanding how to acquire information comes naturally to me.',
+  },
+]
 
 export const experienceItems = [
   {
